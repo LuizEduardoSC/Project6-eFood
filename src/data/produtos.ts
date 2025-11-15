@@ -59,7 +59,7 @@ export const produtosLaDolceVita: ProdutoModel[] = [
     'Spaghetti Carbonara',
     'Massa fresca al dente com molho cremoso de ovos, queijo pecorino, pancetta crocante e pimenta-do-reino na medida.',
     55.9,
-    'https://via.placeholder.com/304x167',
+    ImageProduct,
     'Serve 1 pessoa'
   ),
   new ProdutoModel(
@@ -67,7 +67,7 @@ export const produtosLaDolceVita: ProdutoModel[] = [
     'Lasagna Bolognese',
     'Camadas generosas de massa fresca intercaladas com molho bolonhesa caseiro, bechamel e queijo gratinado.',
     62.9,
-    'https://via.placeholder.com/304x167',
+    ImageProduct,
     'Serve 1 pessoa'
   ),
   new ProdutoModel(
@@ -75,7 +75,7 @@ export const produtosLaDolceVita: ProdutoModel[] = [
     'Risotto ai Funghi',
     'Risoto cremoso preparado com mix de cogumelos frescos, vinho branco, parmesão e manteiga trufada.',
     58.9,
-    'https://via.placeholder.com/304x167',
+    ImageProduct,
     'Serve 1 pessoa'
   ),
   new ProdutoModel(
@@ -83,7 +83,7 @@ export const produtosLaDolceVita: ProdutoModel[] = [
     'Ossobuco alla Milanese',
     'Tradicional ossobuco de vitela braseado lentamente com vinho branco, servido com risoto açafrão.',
     78.9,
-    'https://via.placeholder.com/304x167',
+    ImageProduct,
     'Serve 1 pessoa'
   ),
   new ProdutoModel(
@@ -91,7 +91,7 @@ export const produtosLaDolceVita: ProdutoModel[] = [
     'Gnocchi al Pesto',
     'Nhoque de batata artesanal ao molho pesto genovese com manjericão fresco, pinolis e parmesão.',
     52.9,
-    'https://via.placeholder.com/304x167',
+    ImageProduct,
     'Serve 1 pessoa'
   ),
   new ProdutoModel(
@@ -99,7 +99,7 @@ export const produtosLaDolceVita: ProdutoModel[] = [
     'Tiramisu Classico',
     'Sobremesa tradicional italiana com camadas de biscoito champagne embebido em café, mascarpone e cacau.',
     32.9,
-    'https://via.placeholder.com/304x167',
+    ImageProduct,
     'Serve 1 pessoa'
   )
 ]

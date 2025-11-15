@@ -1,6 +1,6 @@
-import * as S from './styles'
 import Estrela from '../assets/Estrela.svg'
 import Tag from '../components/Tag'
+import * as S from './styles'
 
 type Props = {
   capa: string
@@ -11,7 +11,7 @@ type Props = {
   categoria: string[]
 }
 
-const Restaurante = ({
+const RestauranteCard = ({
   capa,
   nome,
   avaliacao,
@@ -44,4 +44,4 @@ const Restaurante = ({
   )
 }
 
-export default Restaurante
+export default RestauranteCard

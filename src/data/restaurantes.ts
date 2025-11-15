@@ -1,6 +1,6 @@
-import RestauranteModel from '../models/Restaurante'
-import imagemUm from '../assets/Japonesa.svg'
 import imagemDois from '../assets/Italiana.svg'
+import imagemUm from '../assets/Japonesa.svg'
+import RestauranteModel from '../models/Restaurante'
 
 export const restaurantes: RestauranteModel[] = [
   new RestauranteModel(

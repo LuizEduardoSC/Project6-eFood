@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
+import ProdutoCard from '../../Cards/ProdutoCard'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import ProdutoCard from '../../Cards/ProdutoCard'
 import { produtosHiokiSushi, produtosLaDolceVita } from '../../data/produtos'
 import { restaurantes } from '../../data/restaurantes'
 import * as S from './styles'

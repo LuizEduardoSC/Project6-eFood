@@ -1,6 +1,6 @@
 import * as S from './styles'
 import RestauranteModel from '../../models/Restaurante'
-import Restaurante from '../../RestauranteCard'
+import Restaurante from '../../Cards/RestauranteCard'
 
 type Props = {
   restauranteModel: RestauranteModel[]

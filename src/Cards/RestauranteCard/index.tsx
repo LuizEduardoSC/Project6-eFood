@@ -1,5 +1,5 @@
-import Estrela from '../assets/Estrela.svg'
-import Tag from '../components/Tag'
+import Estrela from '../../assets/Estrela.svg'
+import Tag from '../../components/Tag'
 import * as S from './styles'
 
 type Props = {

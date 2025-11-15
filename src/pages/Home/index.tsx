@@ -2,7 +2,7 @@ import Header from '../../components/Header'
 import Restaurantes from '../../components/Restaurantes'
 import { Container } from '../../styles'
 import { restaurantes } from '../../data/restaurantes'
-import Footer from '../../components/footer'
+import Footer from '../../components/Footer'
 
 const Home = () => {
   return (

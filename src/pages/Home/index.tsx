@@ -12,7 +12,6 @@ const Home = () => {
         <Restaurantes restauranteModel={restaurantes} />
       </Container>
       <Footer />
-      <Footer />
     </>
   )
 }

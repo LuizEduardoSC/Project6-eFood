@@ -6,17 +6,21 @@ export const Card = styled.div`
   padding: 8px;
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: 100%;
+  height: 100%;
 `
 
 export const Imagem = styled.img`
-  width: 304px;
+  width: 100%;
   height: 167px;
   object-fit: cover;
 `
 
 export const Content = styled.div`
   padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `
 
 export const Titulo = styled.h3`
@@ -32,6 +36,7 @@ export const Descricao = styled.p`
   line-height: 22px;
   color: ${cores.buttonText};
   margin-bottom: 8px;
+  flex: 1;
 `
 
 export const Porcao = styled.p`

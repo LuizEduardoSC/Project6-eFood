@@ -6,6 +6,12 @@ export const Resta = styled.section`
   grid-template-columns: 1fr 1fr;
   gap: 32px;
   margin-top: 40px;
+  align-items: stretch;
+
+  > * {
+    display: flex;
+    height: 100%;
+  }
 `
 
 export const Card = styled.div`

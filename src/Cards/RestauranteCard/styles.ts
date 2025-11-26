@@ -7,13 +7,16 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   border: solid 1px ${cores.vermelho};
-  width: 472px;
-  min-height: 398px;
+  width: 100%;
+  height: 100%;
   padding-bottom: 40px;
+  min-height: 100%;
 `
 
 export const ImagemResta = styled.img`
-  width: 470px;
+  width: 100%;
+  height: 217px;
+  object-fit: cover;
 `
 
 export const RestaTitle = styled.h2`
@@ -47,6 +50,7 @@ export const RestText = styled.p`
   margin-right: 8px;
   line-height: 22px;
   letter-spacing: 0%;
+  flex: 1;
 `
 
 export const LinkStyled = styled(Link)`

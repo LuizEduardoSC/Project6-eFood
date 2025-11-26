@@ -46,6 +46,12 @@ export const MenuGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
+  align-items: stretch;
+
+  > * {
+    display: flex;
+    height: 100%;
+  }
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);

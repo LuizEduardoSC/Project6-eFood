@@ -10,7 +10,7 @@ const Header = () => {
   const isPerfil = location.pathname.startsWith('/restaurante/')
 
   return (
-    <S.Hero isHome={isHome} style={{ backgroundImage: `url(${heroImg})` }}>
+    <S.Hero $isHome={isHome} style={{ backgroundImage: `url(${heroImg})` }}>
       <Container>
         {isPerfil ? (
           <S.HeaderPerfil>

@@ -2,12 +2,12 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 
 interface HeroProps {
-  isHome?: boolean
+  $isHome?: boolean
 }
 
 export const Hero = styled.div<HeroProps>`
   width: 100%;
-  height: ${(props) => (props.isHome ? '384px' : '186px')};
+  height: ${(props) => (props.$isHome ? '384px' : '186px')};
   display: flex;
   justify-content: center;
   background-repeat: no-repeat;

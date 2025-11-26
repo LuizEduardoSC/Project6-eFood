@@ -1,33 +1,72 @@
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ProdutoCard from '../../Cards/ProdutoCard'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import { produtosHiokiSushi, produtosLaDolceVita } from '../../data/produtos'
-import { restaurantes } from '../../data/restaurantes'
 import * as S from './styles'
+import { api, RestauranteAPI, ProdutoAPI } from '../../services/api'
 
 const Restaurante = () => {
   const { id } = useParams<{ id: string }>()
+  const [restaurante, setRestaurante] = useState<RestauranteAPI | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  const restaurante = restaurantes.find((r) => r.id === Number(id))
+  useEffect(() => {
+    const carregarRestaurante = async () => {
+      if (!id) return
 
-  const getProdutos = () => {
-    if (!restaurante) return []
+      try {
+        setLoading(true)
+        const dados = await api.buscarRestaurantePorId(Number(id))
 
-    switch (restaurante.id) {
-      case 1:
-        return produtosHiokiSushi
-      case 2:
-        return produtosLaDolceVita
-      default:
-        return produtosHiokiSushi
+        if (!dados) {
+          setError('Restaurante não encontrado')
+        } else {
+          setRestaurante(dados)
+          setError(null)
+        }
+      } catch (err) {
+        setError('Erro ao carregar restaurante')
+        console.error(err)
+      } finally {
+        setLoading(false)
+      }
     }
+
+    carregarRestaurante()
+  }, [id])
+
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <S.MenuSection>
+          <S.Container>
+            <div style={{ padding: '40px', textAlign: 'center' }}>
+              Carregando...
+            </div>
+          </S.Container>
+        </S.MenuSection>
+        <Footer />
+      </>
+    )
   }
 
-  const produtos = getProdutos()
-
-  if (!restaurante) {
-    return <div>Restaurante não encontrado</div>
+  if (error || !restaurante) {
+    return (
+      <>
+        <Header />
+        <S.MenuSection>
+          <S.Container>
+            <div style={{ padding: '40px', textAlign: 'center', color: 'red' }}>
+              {error || 'Restaurante não encontrado'}
+            </div>
+          </S.Container>
+        </S.MenuSection>
+        <Footer />
+      </>
+    )
   }
 
   return (
@@ -36,8 +75,8 @@ const Restaurante = () => {
       <S.Hero style={{ backgroundImage: `url(${restaurante.capa})` }}>
         <S.HeroOverlay>
           <S.Container>
-            <S.CategoryTag>{restaurante.categorias[0]}</S.CategoryTag>
-            <S.RestaurantName>{restaurante.nome}</S.RestaurantName>
+            <S.CategoryTag>{restaurante.tipo}</S.CategoryTag>
+            <S.RestaurantName>{restaurante.titulo}</S.RestaurantName>
           </S.Container>
         </S.HeroOverlay>
       </S.Hero>
@@ -45,10 +84,10 @@ const Restaurante = () => {
       <S.MenuSection>
         <S.Container>
           <S.MenuGrid>
-            {produtos.map((produto) => (
+            {restaurante.cardapio.map((produto: ProdutoAPI) => (
               <ProdutoCard
                 key={produto.id}
-                imagem={produto.imagem}
+                imagem={produto.foto}
                 nome={produto.nome}
                 descricao={produto.descricao}
                 porcao={produto.porcao}

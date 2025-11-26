@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import * as S from './styles'
+import Modal from '../../components/Modal'
 
 type Props = {
   imagem: string
@@ -9,6 +11,8 @@ type Props = {
 }
 
 const ProdutoCard = ({ imagem, nome, descricao, porcao, preco }: Props) => {
+  const [modalAberta, setModalAberta] = useState(false)
+
   const formatarPreco = (valor: number) => {
     return valor.toLocaleString('pt-BR', {
       minimumFractionDigits: 2,
@@ -17,17 +21,28 @@ const ProdutoCard = ({ imagem, nome, descricao, porcao, preco }: Props) => {
   }
 
   return (
-    <S.Card>
-      <S.Imagem src={imagem} alt={nome} />
-      <S.Content>
-        <S.Titulo>{nome}</S.Titulo>
-        <S.Descricao>{descricao}</S.Descricao>
-        <S.Porcao>{porcao}</S.Porcao>
-        <S.BotaoAdicionar>
-          Adicionar ao carrinho - R$ {formatarPreco(preco)}
-        </S.BotaoAdicionar>
-      </S.Content>
-    </S.Card>
+    <>
+      <S.Card>
+        <S.Imagem src={imagem} alt={nome} />
+        <S.Content>
+          <S.Titulo>{nome}</S.Titulo>
+          <S.Descricao>{descricao}</S.Descricao>
+          <S.Porcao>{porcao}</S.Porcao>
+          <S.BotaoAdicionar onClick={() => setModalAberta(true)}>
+            Adicionar ao carrinho - R$ {formatarPreco(preco)}
+          </S.BotaoAdicionar>
+        </S.Content>
+      </S.Card>
+      <Modal
+        isOpen={modalAberta}
+        onClose={() => setModalAberta(false)}
+        imagem={imagem}
+        nome={nome}
+        descricao={descricao}
+        porcao={porcao}
+        preco={preco}
+      />
+    </>
   )
 }
 

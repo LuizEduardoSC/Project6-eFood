@@ -76,7 +76,9 @@ const ModalCarrinho = () => {
                     <S.ImagemProduto src={item.imagem} alt={item.nome} />
                     <S.ConteudoItem>
                       <S.NomeProduto>{item.nome}</S.NomeProduto>
-                      <S.PrecoProduto>R$ {formatarPreco(item.preco)}</S.PrecoProduto>
+                      <S.PrecoProduto>
+                        R$ {formatarPreco(item.preco)}
+                      </S.PrecoProduto>
                     </S.ConteudoItem>
                     <S.BotaoRemover onClick={() => removerItem(index)}>
                       <img src={lixeiraIcon} alt="Remover" />
@@ -87,9 +89,13 @@ const ModalCarrinho = () => {
               <S.ResumoCarrinho>
                 <S.LinhaTotal>
                   <S.LabelTotal>Valor total</S.LabelTotal>
-                  <S.ValorTotal>R$ {formatarPreco(calcularTotal())}</S.ValorTotal>
+                  <S.ValorTotal>
+                    R$ {formatarPreco(calcularTotal())}
+                  </S.ValorTotal>
                 </S.LinhaTotal>
-                <S.BotaoContinuar onClick={fechar}>Continuar comprando</S.BotaoContinuar>
+                <S.BotaoContinuar onClick={fechar}>
+                  Continuar comprando
+                </S.BotaoContinuar>
               </S.ResumoCarrinho>
             </>
           )}
@@ -100,4 +106,3 @@ const ModalCarrinho = () => {
 }
 
 export default ModalCarrinho
-

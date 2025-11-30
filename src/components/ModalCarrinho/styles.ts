@@ -32,7 +32,8 @@ export const Drawer = styled.div<DrawerProps>`
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  transform: ${(props) => (props.$isOpen ? 'translateX(0)' : 'translateX(100%)')};
+  transform: ${(props) =>
+    props.$isOpen ? 'translateX(0)' : 'translateX(100%)'};
   transition: transform 0.3s ease-in-out;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
 
@@ -285,4 +286,3 @@ export const MensagemVazio = styled.p`
     margin-bottom: 12px;
   }
 `
-

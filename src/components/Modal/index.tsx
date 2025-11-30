@@ -1,10 +1,14 @@
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import * as S from './styles'
 import fecharIcon from '../../assets/fechar.svg'
+import { adicionar } from '../../store/reducers/cartSlice'
+import type { ProdutoCarrinho } from '../../store/reducers/cartSlice'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
+  id: number
   imagem: string
   nome: string
   descricao: string
@@ -15,17 +19,33 @@ type Props = {
 const Modal = ({
   isOpen,
   onClose,
+  id,
   imagem,
   nome,
   descricao,
   porcao,
   preco
 }: Props) => {
+  const dispatch = useDispatch()
+
   const formatarPreco = (valor: number) => {
     return valor.toLocaleString('pt-BR', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     })
+  }
+
+  const adicionarAoCarrinho = () => {
+    const produto: ProdutoCarrinho = {
+      id,
+      nome,
+      descricao,
+      preco,
+      imagem,
+      porcao
+    }
+    dispatch(adicionar(produto))
+    onClose()
   }
 
   useEffect(() => {
@@ -59,7 +79,7 @@ const Modal = ({
           <S.Titulo>{nome}</S.Titulo>
           <S.Descricao>{descricao}</S.Descricao>
           <S.Porcao>Serve: {porcao}</S.Porcao>
-          <S.BotaoAdicionar>
+          <S.BotaoAdicionar onClick={adicionarAoCarrinho}>
             Adicionar ao carrinho - R$ {formatarPreco(preco)}
           </S.BotaoAdicionar>
         </S.Content>

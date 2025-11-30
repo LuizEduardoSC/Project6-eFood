@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { cores, device } from '../../styles'
 
 export const Card = styled.div`
   background-color: ${cores.vermelho};
@@ -8,12 +8,24 @@ export const Card = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+
+  @media ${device.mobile} {
+    padding: 6px;
+  }
 `
 
 export const Imagem = styled.img`
   width: 100%;
   height: 167px;
   object-fit: cover;
+
+  @media ${device.tablet} {
+    height: 150px;
+  }
+
+  @media ${device.mobile} {
+    height: 140px;
+  }
 `
 
 export const Content = styled.div`
@@ -21,6 +33,10 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+
+  @media ${device.mobile} {
+    padding-top: 6px;
+  }
 `
 
 export const Titulo = styled.h3`
@@ -28,6 +44,11 @@ export const Titulo = styled.h3`
   font-weight: 900;
   color: ${cores.buttonText};
   margin-bottom: 8px;
+
+  @media ${device.mobile} {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
 `
 
 export const Descricao = styled.p`
@@ -37,6 +58,12 @@ export const Descricao = styled.p`
   color: ${cores.buttonText};
   margin-bottom: 8px;
   flex: 1;
+
+  @media ${device.mobile} {
+    font-size: 13px;
+    line-height: 20px;
+    margin-bottom: 6px;
+  }
 `
 
 export const Porcao = styled.p`
@@ -45,6 +72,12 @@ export const Porcao = styled.p`
   line-height: 22px;
   color: ${cores.buttonText};
   margin-bottom: 16px;
+
+  @media ${device.mobile} {
+    font-size: 13px;
+    line-height: 20px;
+    margin-bottom: 12px;
+  }
 `
 
 export const BotaoAdicionar = styled.button`
@@ -60,5 +93,10 @@ export const BotaoAdicionar = styled.button`
 
   &:hover {
     opacity: 0.8;
+  }
+
+  @media ${device.mobile} {
+    padding: 6px 8px;
+    font-size: 13px;
   }
 `

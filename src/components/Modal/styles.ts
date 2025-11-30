@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { cores, device } from '../../styles'
 
 export const Overlay = styled.div`
   position: fixed;
@@ -13,6 +13,7 @@ export const Overlay = styled.div`
   align-items: center;
   z-index: 1000;
   animation: fadeIn 0.3s ease-in-out;
+  padding: 16px;
 
   @keyframes fadeIn {
     from {
@@ -22,12 +23,17 @@ export const Overlay = styled.div`
       opacity: 1;
     }
   }
+
+  @media ${device.mobile} {
+    padding: 8px;
+  }
 `
 
 export const ModalContent = styled.div`
   position: relative;
   background-color: ${cores.vermelho};
   width: 1024px;
+  max-width: 100%;
   height: 344px;
   display: flex;
   align-items: flex-start;
@@ -44,10 +50,18 @@ export const ModalContent = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    width: 95%;
+  @media ${device.tablet} {
+    width: 90%;
     height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  @media ${device.mobile} {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    max-height: 95vh;
   }
 `
 
@@ -73,6 +87,12 @@ export const CloseButton = styled.button`
     width: 16px;
     height: 16px;
   }
+
+  @media ${device.mobile} {
+    top: 4px;
+    right: 4px;
+    padding: 4px;
+  }
 `
 
 export const Imagem = styled.img`
@@ -83,7 +103,14 @@ export const Imagem = styled.img`
   margin-top: 32px;
   flex-shrink: 0;
 
-  @media (max-width: 768px) {
+  @media ${device.tablet} {
+    width: 240px;
+    height: 240px;
+    margin-left: 24px;
+    margin-top: 24px;
+  }
+
+  @media ${device.mobile} {
     width: 100%;
     height: 200px;
     margin-left: 0;
@@ -101,8 +128,14 @@ export const Content = styled.div`
   gap: 16px;
   justify-content: flex-start;
 
-  @media (max-width: 768px) {
+  @media ${device.tablet} {
     padding: 24px;
+    gap: 12px;
+  }
+
+  @media ${device.mobile} {
+    padding: 16px;
+    gap: 12px;
   }
 `
 
@@ -116,6 +149,10 @@ export const Titulo = styled.h2`
   text-align: left;
   color: ${cores.buttonText};
   margin: 0;
+
+  @media ${device.mobile} {
+    font-size: 16px;
+  }
 `
 
 export const Descricao = styled.p`
@@ -124,6 +161,11 @@ export const Descricao = styled.p`
   line-height: 22px;
   color: ${cores.buttonText};
   margin: 0;
+
+  @media ${device.mobile} {
+    font-size: 13px;
+    line-height: 20px;
+  }
 `
 
 export const Porcao = styled.p`
@@ -131,6 +173,10 @@ export const Porcao = styled.p`
   font-weight: 400;
   color: ${cores.buttonText};
   margin: 0;
+
+  @media ${device.mobile} {
+    font-size: 13px;
+  }
 `
 
 export const BotaoAdicionar = styled.button`
@@ -152,5 +198,15 @@ export const BotaoAdicionar = styled.button`
 
   &:hover {
     opacity: 0.8;
+  }
+
+  @media ${device.tablet} {
+    width: 200px;
+  }
+
+  @media ${device.mobile} {
+    width: 100%;
+    height: 32px;
+    font-size: 13px;
   }
 `

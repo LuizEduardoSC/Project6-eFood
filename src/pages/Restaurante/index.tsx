@@ -87,6 +87,7 @@ const Restaurante = () => {
             {restaurante.cardapio.map((produto: ProdutoAPI) => (
               <ProdutoCard
                 key={produto.id}
+                id={produto.id}
                 imagem={produto.foto}
                 nome={produto.nome}
                 descricao={produto.descricao}

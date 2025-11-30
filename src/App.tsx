@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
 import Restaurante from './pages/Restaurante'
+import ModalCarrinho from './components/ModalCarrinho'
 import { GlobalCss } from './styles'
 
 const rotas = createBrowserRouter([
@@ -19,6 +20,7 @@ function App() {
     <>
       <GlobalCss />
       <RouterProvider router={rotas} />
+      <ModalCarrinho />
     </>
   )
 }

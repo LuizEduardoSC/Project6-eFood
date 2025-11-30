@@ -3,6 +3,7 @@ import * as S from './styles'
 import Modal from '../../components/Modal'
 
 type Props = {
+  id: number
   imagem: string
   nome: string
   descricao: string
@@ -10,7 +11,7 @@ type Props = {
   preco: number
 }
 
-const ProdutoCard = ({ imagem, nome, descricao, porcao, preco }: Props) => {
+const ProdutoCard = ({ id, imagem, nome, descricao, porcao, preco }: Props) => {
   const [modalAberta, setModalAberta] = useState(false)
 
   const formatarPreco = (valor: number) => {
@@ -36,6 +37,7 @@ const ProdutoCard = ({ imagem, nome, descricao, porcao, preco }: Props) => {
       <Modal
         isOpen={modalAberta}
         onClose={() => setModalAberta(false)}
+        id={id}
         imagem={imagem}
         nome={nome}
         descricao={descricao}

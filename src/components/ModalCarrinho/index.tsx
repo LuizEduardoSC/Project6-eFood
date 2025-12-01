@@ -2,16 +2,21 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import * as S from './styles'
 import { RootReducer } from '../../store'
-import { remover, fecharCarrinho } from '../../store/reducers/cartSlice'
+import { remover, fecharCarrinho, limpar } from '../../store/reducers/cartSlice'
 import lixeiraIcon from '../../assets/lixeira.svg'
 import fecharIcon from '../../assets/fechar.svg'
-import ModalEntrega from '../ModalEntrega'
+import ModalEntrega, { DadosEntrega } from '../ModalEntrega'
+import ModalPagamento from '../ModalPagamento'
+import ModalConfirmacao from '../ModalConfirmacao'
 
 const ModalCarrinho = () => {
   const itensCarrinho = useSelector((state: RootReducer) => state.cart.itens)
   const isOpen = useSelector((state: RootReducer) => state.cart.isOpen)
   const dispatch = useDispatch()
   const [isEntregaOpen, setIsEntregaOpen] = useState(false)
+  const [isPagamentoOpen, setIsPagamentoOpen] = useState(false)
+  const [isConfirmacaoOpen, setIsConfirmacaoOpen] = useState(false)
+  const [dadosEntrega, setDadosEntrega] = useState<DadosEntrega | null>(null)
 
   const formatarPreco = (valor: number) => {
     return valor.toLocaleString('pt-BR', {
@@ -31,11 +36,34 @@ const ModalCarrinho = () => {
   const fechar = () => {
     dispatch(fecharCarrinho())
     setIsEntregaOpen(false)
+    setIsPagamentoOpen(false)
   }
 
   const iniciarEntrega = () => {
     if (itensCarrinho.length === 0) return
     setIsEntregaOpen(true)
+  }
+
+  const avancarParaPagamento = (dados: DadosEntrega) => {
+    setDadosEntrega(dados)
+    setIsEntregaOpen(false)
+    setIsPagamentoOpen(true)
+  }
+
+  const voltarParaEntrega = () => {
+    setIsPagamentoOpen(false)
+    setIsEntregaOpen(true)
+  }
+
+  const finalizarFluxo = () => {
+    setIsConfirmacaoOpen(false)
+    dispatch(limpar())
+    fechar()
+  }
+
+  const handleCheckoutSucesso = () => {
+    setIsPagamentoOpen(false)
+    setIsConfirmacaoOpen(true)
   }
 
   useEffect(() => {
@@ -114,8 +142,19 @@ const ModalCarrinho = () => {
           isOpen={isEntregaOpen}
           onClose={() => setIsEntregaOpen(false)}
           onVoltarCarrinho={() => setIsEntregaOpen(false)}
+          onConfirmarEntrega={avancarParaPagamento}
         />
       )}
+      {isPagamentoOpen && (
+        <ModalPagamento
+          isOpen={isPagamentoOpen}
+          dadosEntrega={dadosEntrega}
+          onClose={() => setIsPagamentoOpen(false)}
+          onVoltarEntrega={voltarParaEntrega}
+          onCheckoutSucesso={handleCheckoutSucesso}
+        />
+      )}
+      <ModalConfirmacao isOpen={isConfirmacaoOpen} onClose={finalizarFluxo} />
     </>
   )
 }

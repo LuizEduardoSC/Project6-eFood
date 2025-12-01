@@ -19,6 +19,36 @@ export interface ProdutoAPI {
 }
 
 const API_BASE_URL = 'https://api-ebac.vercel.app/api/efood/restaurantes'
+const CHECKOUT_URL = 'https://api-ebac.vercel.app/api/efood/checkout'
+
+export interface CheckoutItem {
+  id: number
+  nome: string
+  preco: number
+  quantidade: number
+}
+
+export interface CheckoutEntrega {
+  recebedor: string
+  endereco: string
+  cidade: string
+  cep: string
+  complemento?: string
+}
+
+export interface CheckoutPagamento {
+  nomeNoCartao: string
+  numeroCartao: string
+  cvv: string
+  mesVencimento: string
+  anoVencimento: string
+}
+
+export interface CheckoutPayload {
+  itens: CheckoutItem[]
+  entrega: CheckoutEntrega
+  pagamento: CheckoutPagamento
+}
 
 export const api = {
   async buscarRestaurantes(): Promise<RestauranteAPI[]> {
@@ -59,5 +89,21 @@ export const api = {
       console.error('Erro ao buscar restaurante:', error)
       throw error
     }
+  },
+
+  async checkout(payload: CheckoutPayload) {
+    const response = await fetch(CHECKOUT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+
+    if (!response.ok) {
+      throw new Error('Erro ao realizar checkout')
+    }
+
+    return response.json()
   }
 }

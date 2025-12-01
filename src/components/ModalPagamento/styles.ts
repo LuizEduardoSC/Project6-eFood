@@ -92,14 +92,34 @@ export const Input = styled.input`
 export const LinhaCampos = styled.div`
   display: flex;
   gap: 8px;
+  width: 100%;
 
   @media ${device.mobile} {
     flex-direction: column;
+    gap: 16px;
   }
 `
 
 export const Coluna = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+`
+
+export const ColunaNumeroCartao = styled.div`
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+`
+
+export const ColunaCVV = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 80px;
 `
 
 export const Resumo = styled.div`

@@ -73,25 +73,15 @@ const ModalEntrega = ({
   }
 
   return (
-    <S.Overlay onClick={onClose}>
+    <S.Overlay $isOpen={isOpen} onClick={onClose}>
       <S.Drawer $isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
-        <S.Container>
-          <button
-            style={{
-              position: 'absolute',
-              top: 8,
-              right: 8,
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-            onClick={onClose}
-          >
-            <img src={fecharIcon} alt="Fechar" />
-          </button>
-
+        <S.Header>
           <S.Titulo>Entrega</S.Titulo>
-
+          <S.CloseButton onClick={onClose}>
+            <img src={fecharIcon} alt="Fechar" />
+          </S.CloseButton>
+        </S.Header>
+        <S.Container>
           {erro && <S.Erro>{erro}</S.Erro>}
 
           <S.CampoGrupo>

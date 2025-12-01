@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import { cores, device } from '../../styles'
 
-export const Overlay = styled.div`
+interface OverlayProps {
+  $isOpen: boolean
+}
+
+export const Overlay = styled.div<OverlayProps>`
   position: fixed;
   top: 0;
   left: 0;
@@ -9,6 +13,9 @@ export const Overlay = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1100;
+  opacity: ${(props) => (props.$isOpen ? 1 : 0)};
+  pointer-events: ${(props) => (props.$isOpen ? 'auto' : 'none')};
+  transition: opacity 0.3s ease-in-out;
 `
 
 interface DrawerProps {
@@ -25,7 +32,11 @@ export const Drawer = styled.div<DrawerProps>`
   z-index: 1101;
   display: flex;
   flex-direction: column;
-  padding: 24px 16px;
+  transform: ${(props) =>
+    props.$isOpen ? 'translateX(0)' : 'translateX(100%)'};
+  transition: transform 0.3s ease-in-out;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+  padding: 16px;
 
   @media ${device.tablet} {
     width: 320px;
@@ -33,17 +44,31 @@ export const Drawer = styled.div<DrawerProps>`
 
   @media ${device.mobile} {
     width: 100%;
+    padding: 12px;
   }
 `
 
 export const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 8px;
 
   @media ${device.mobile} {
-    padding: 24px 16px;
+    gap: 12px;
   }
+`
+
+export const Header = styled.div`
+  padding: 0 0 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 235, 217, 0.3);
+  margin-bottom: 16px;
 `
 
 export const Titulo = styled.h2`
@@ -51,7 +76,34 @@ export const Titulo = styled.h2`
   font-weight: 900;
   color: ${cores.buttonText};
   margin: 0;
-  margin-bottom: 16px;
+
+  @media ${device.mobile} {
+    font-size: 16px;
+  }
+`
+
+export const CloseButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  @media ${device.mobile} {
+    padding: 2px;
+  }
 `
 
 export const CampoGrupo = styled.div`
@@ -77,15 +129,20 @@ export const Input = styled.input`
 
 export const LinhaCampos = styled.div`
   display: flex;
-  gap: 16px;
+  gap: 8px;
+  width: 100%;
 
   @media ${device.mobile} {
     flex-direction: column;
+    gap: 16px;
   }
 `
 
 export const Coluna = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 `
 
 export const Acoes = styled.div`

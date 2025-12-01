@@ -152,13 +152,26 @@ const ModalPagamento = ({
             />
           </S.GrupoCampo>
 
-          <S.GrupoCampo>
-            <S.Label>Número do cartão</S.Label>
-            <S.Input
-              value={pagamento.numeroCartao}
-              onChange={(e) => handleChange('numeroCartao', e.target.value)}
-            />
-          </S.GrupoCampo>
+          <S.LinhaCampos>
+            <S.ColunaNumeroCartao>
+              <S.GrupoCampo>
+                <S.Label>Número do cartão</S.Label>
+                <S.Input
+                  value={pagamento.numeroCartao}
+                  onChange={(e) => handleChange('numeroCartao', e.target.value)}
+                />
+              </S.GrupoCampo>
+            </S.ColunaNumeroCartao>
+            <S.ColunaCVV>
+              <S.GrupoCampo>
+                <S.Label>CVV</S.Label>
+                <S.Input
+                  value={pagamento.cvv}
+                  onChange={(e) => handleChange('cvv', e.target.value)}
+                />
+              </S.GrupoCampo>
+            </S.ColunaCVV>
+          </S.LinhaCampos>
 
           <S.LinhaCampos>
             <S.Coluna>
@@ -180,15 +193,6 @@ const ModalPagamento = ({
                   onChange={(e) =>
                     handleChange('anoVencimento', e.target.value)
                   }
-                />
-              </S.GrupoCampo>
-            </S.Coluna>
-            <S.Coluna>
-              <S.GrupoCampo>
-                <S.Label>CVV</S.Label>
-                <S.Input
-                  value={pagamento.cvv}
-                  onChange={(e) => handleChange('cvv', e.target.value)}
                 />
               </S.GrupoCampo>
             </S.Coluna>

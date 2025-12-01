@@ -109,7 +109,7 @@ const ModalPagamento = ({
         endereco: dadosEntrega.endereco,
         cidade: dadosEntrega.cidade,
         cep: dadosEntrega.cep,
-        complemento: dadosEntrega.complemento
+        complemento: dadosEntrega.complemento || ''
       },
       pagamento: {
         nomeNoCartao: pagamento.nomeNoCartao,

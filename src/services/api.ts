@@ -92,16 +92,54 @@ export const api = {
   },
 
   async checkout(payload: CheckoutPayload) {
+    // Converter para formato snake_case que é comum em APIs REST
+    const payloadFormatado = {
+      products: payload.itens.map((item) => ({
+        id: item.id,
+        price: item.preco // ou o preço correto
+      })),
+      delivery: {
+        receiver: payload.entrega.recebedor,
+        address: {
+          description: payload.entrega.endereco,
+          city: payload.entrega.cidade,
+          zipCode: payload.entrega.cep,
+          number: 0, // você precisa capturar o número do endereço
+          complement: payload.entrega.complemento || ''
+        }
+      },
+      payment: {
+        card: {
+          name: payload.pagamento.nomeNoCartao,
+          number: payload.pagamento.numeroCartao,
+          code: Number(payload.pagamento.cvv),
+          expires: {
+            month: Number(payload.pagamento.mesVencimento),
+            year: Number(payload.pagamento.anoVencimento)
+          }
+        }
+      }
+    }
+
+    console.log(
+      'Payload formatado enviado:',
+      JSON.stringify(payloadFormatado, null, 2)
+    )
+
     const response = await fetch(CHECKOUT_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payloadFormatado)
     })
 
     if (!response.ok) {
-      throw new Error('Erro ao realizar checkout')
+      const errorText = await response.text()
+      console.error('Erro na resposta:', response.status, errorText)
+      throw new Error(
+        `Erro ao realizar checkout: ${errorText || response.statusText}`
+      )
     }
 
     return response.json()

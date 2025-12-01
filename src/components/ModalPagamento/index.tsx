@@ -132,7 +132,7 @@ const ModalPagamento = ({
   }
 
   return (
-    <S.Overlay onClick={onClose}>
+    <S.Overlay $isOpen={isOpen} onClick={onClose}>
       <S.Drawer $isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
         <S.Header>
           <S.Titulo>Pagamento</S.Titulo>

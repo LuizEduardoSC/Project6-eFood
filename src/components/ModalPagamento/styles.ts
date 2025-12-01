@@ -5,7 +5,11 @@ interface DrawerProps {
   $isOpen: boolean
 }
 
-export const Overlay = styled.div`
+interface OverlayProps {
+  $isOpen: boolean
+}
+
+export const Overlay = styled.div<OverlayProps>`
   position: fixed;
   top: 0;
   left: 0;
@@ -13,6 +17,9 @@ export const Overlay = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1200;
+  opacity: ${(props) => (props.$isOpen ? 1 : 0)};
+  pointer-events: ${(props) => (props.$isOpen ? 'auto' : 'none')};
+  transition: opacity 0.3s ease-in-out;
 `
 
 export const Drawer = styled.div<DrawerProps>`
@@ -25,6 +32,10 @@ export const Drawer = styled.div<DrawerProps>`
   z-index: 1201;
   display: flex;
   flex-direction: column;
+  transform: ${(props) =>
+    props.$isOpen ? 'translateX(0)' : 'translateX(100%)'};
+  transition: transform 0.3s ease-in-out;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
   padding: 16px;
 
   @media ${device.tablet} {
@@ -33,6 +44,7 @@ export const Drawer = styled.div<DrawerProps>`
 
   @media ${device.mobile} {
     width: 100%;
+    padding: 12px;
   }
 `
 
@@ -41,6 +53,10 @@ export const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+
+  @media ${device.mobile} {
+    margin-bottom: 12px;
+  }
 `
 
 export const Titulo = styled.h2`
@@ -48,6 +64,10 @@ export const Titulo = styled.h2`
   font-weight: 900;
   color: ${cores.buttonText};
   margin: 0;
+
+  @media ${device.mobile} {
+    font-size: 16px;
+  }
 `
 
 export const CloseButton = styled.button`
@@ -58,6 +78,20 @@ export const CloseButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  @media ${device.mobile} {
+    padding: 2px;
+  }
 `
 
 export const Content = styled.div`
@@ -66,6 +100,10 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @media ${device.mobile} {
+    gap: 12px;
+  }
 `
 
 export const GrupoCampo = styled.div`
@@ -78,6 +116,10 @@ export const Label = styled.label`
   font-size: 14px;
   font-weight: 700;
   color: ${cores.buttonText};
+
+  @media ${device.mobile} {
+    font-size: 13px;
+  }
 `
 
 export const Input = styled.input`
@@ -87,6 +129,11 @@ export const Input = styled.input`
   background-color: ${cores.buttonText};
   color: ${cores.vermelho};
   font-size: 14px;
+
+  @media ${device.mobile} {
+    height: 36px;
+    font-size: 13px;
+  }
 `
 
 export const LinhaCampos = styled.div`
@@ -112,6 +159,10 @@ export const ColunaNumeroCartao = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 0;
+
+  @media ${device.mobile} {
+    flex: 1;
+  }
 `
 
 export const ColunaCVV = styled.div`
@@ -120,6 +171,10 @@ export const ColunaCVV = styled.div`
   flex-direction: column;
   min-width: 0;
   max-width: 80px;
+
+  @media ${device.mobile} {
+    max-width: 100%;
+  }
 `
 
 export const Resumo = styled.div`
@@ -131,6 +186,10 @@ export const Resumo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  @media ${device.mobile} {
+    font-size: 13px;
+  }
 `
 
 export const TotalLinha = styled.div`
@@ -144,6 +203,11 @@ export const Botoes = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media ${device.mobile} {
+    margin-top: 12px;
+    gap: 12px;
+  }
 `
 
 export const BotaoPrimario = styled.button`
@@ -155,6 +219,21 @@ export const BotaoPrimario = styled.button`
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  @media ${device.mobile} {
+    height: 32px;
+    font-size: 13px;
+  }
 `
 
 export const BotaoSecundario = styled.button`
@@ -166,6 +245,16 @@ export const BotaoSecundario = styled.button`
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @media ${device.mobile} {
+    height: 32px;
+    font-size: 13px;
+  }
 `
 
 export const Erro = styled.p`
@@ -173,4 +262,9 @@ export const Erro = styled.p`
   background-color: #8b0000;
   padding: 8px;
   font-size: 12px;
+
+  @media ${device.mobile} {
+    padding: 6px;
+    font-size: 11px;
+  }
 `

@@ -116,6 +116,10 @@ export const Label = styled.label`
   font-size: 14px;
   font-weight: 700;
   color: ${cores.buttonText};
+
+  @media ${device.mobile} {
+    font-size: 13px;
+  }
 `
 
 export const Input = styled.input`
@@ -125,6 +129,11 @@ export const Input = styled.input`
   background-color: ${cores.buttonText};
   color: ${cores.vermelho};
   font-size: 14px;
+
+  @media ${device.mobile} {
+    height: 36px;
+    font-size: 13px;
+  }
 `
 
 export const LinhaCampos = styled.div`
@@ -160,6 +169,16 @@ export const BotaoPrimario = styled.button`
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @media ${device.mobile} {
+    height: 32px;
+    font-size: 13px;
+  }
 `
 
 export const BotaoSecundario = styled.button`
@@ -171,6 +190,16 @@ export const BotaoSecundario = styled.button`
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @media ${device.mobile} {
+    height: 32px;
+    font-size: 13px;
+  }
 `
 
 export const Erro = styled.p`
@@ -178,4 +207,9 @@ export const Erro = styled.p`
   background-color: #8b0000;
   padding: 8px;
   font-size: 12px;
+
+  @media ${device.mobile} {
+    padding: 6px;
+    font-size: 11px;
+  }
 `

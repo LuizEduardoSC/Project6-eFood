@@ -1,15 +1,17 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import * as S from './styles'
 import { RootReducer } from '../../store'
 import { remover, fecharCarrinho } from '../../store/reducers/cartSlice'
 import lixeiraIcon from '../../assets/lixeira.svg'
 import fecharIcon from '../../assets/fechar.svg'
+import ModalEntrega from '../ModalEntrega'
 
 const ModalCarrinho = () => {
   const itensCarrinho = useSelector((state: RootReducer) => state.cart.itens)
   const isOpen = useSelector((state: RootReducer) => state.cart.isOpen)
   const dispatch = useDispatch()
+  const [isEntregaOpen, setIsEntregaOpen] = useState(false)
 
   const formatarPreco = (valor: number) => {
     return valor.toLocaleString('pt-BR', {
@@ -28,6 +30,12 @@ const ModalCarrinho = () => {
 
   const fechar = () => {
     dispatch(fecharCarrinho())
+    setIsEntregaOpen(false)
+  }
+
+  const iniciarEntrega = () => {
+    if (itensCarrinho.length === 0) return
+    setIsEntregaOpen(true)
   }
 
   useEffect(() => {
@@ -93,14 +101,21 @@ const ModalCarrinho = () => {
                     R$ {formatarPreco(calcularTotal())}
                   </S.ValorTotal>
                 </S.LinhaTotal>
-                <S.BotaoContinuar onClick={fechar}>
-                  Continuar comprando
+                <S.BotaoContinuar onClick={iniciarEntrega}>
+                  Continuar com a entrega
                 </S.BotaoContinuar>
               </S.ResumoCarrinho>
             </>
           )}
         </S.Content>
       </S.Drawer>
+      {isEntregaOpen && (
+        <ModalEntrega
+          isOpen={isEntregaOpen}
+          onClose={() => setIsEntregaOpen(false)}
+          onVoltarCarrinho={() => setIsEntregaOpen(false)}
+        />
+      )}
     </>
   )
 }

@@ -5,9 +5,10 @@ import fecharIcon from '../../assets/fechar.svg'
 type Props = {
   isOpen: boolean
   onClose: () => void
+  orderId?: string
 }
 
-const ModalConfirmacao = ({ isOpen, onClose }: Props) => {
+const ModalConfirmacao = ({ isOpen, onClose, orderId }: Props) => {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
@@ -43,6 +44,12 @@ const ModalConfirmacao = ({ isOpen, onClose }: Props) => {
 
         <S.Content>
           <S.Titulo>Pedido realizado!</S.Titulo>
+          {orderId && (
+            <S.OrderIdContainer>
+              <S.OrderIdLabel>Número do pedido:</S.OrderIdLabel>
+              <S.OrderIdValue>{orderId}</S.OrderIdValue>
+            </S.OrderIdContainer>
+          )}
           <S.Texto>
             Estamos felizes em informar que seu pedido já está em processo de
             preparação e, em breve, será entregue no endereço fornecido.

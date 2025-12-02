@@ -17,6 +17,7 @@ const ModalCarrinho = () => {
   const [isPagamentoOpen, setIsPagamentoOpen] = useState(false)
   const [isConfirmacaoOpen, setIsConfirmacaoOpen] = useState(false)
   const [dadosEntrega, setDadosEntrega] = useState<DadosEntrega | null>(null)
+  const [orderId, setOrderId] = useState<string | undefined>(undefined)
 
   const formatarPreco = (valor: number) => {
     return valor.toLocaleString('pt-BR', {
@@ -61,7 +62,8 @@ const ModalCarrinho = () => {
     fechar()
   }
 
-  const handleCheckoutSucesso = () => {
+  const handleCheckoutSucesso = (orderId?: string) => {
+    setOrderId(orderId)
     setIsPagamentoOpen(false)
     setIsConfirmacaoOpen(true)
   }
@@ -154,7 +156,11 @@ const ModalCarrinho = () => {
           onCheckoutSucesso={handleCheckoutSucesso}
         />
       )}
-      <ModalConfirmacao isOpen={isConfirmacaoOpen} onClose={finalizarFluxo} />
+      <ModalConfirmacao
+        isOpen={isConfirmacaoOpen}
+        onClose={finalizarFluxo}
+        orderId={orderId}
+      />
     </>
   )
 }

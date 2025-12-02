@@ -122,6 +122,44 @@ export const Texto = styled.p`
   }
 `
 
+export const OrderIdContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 328px;
+
+  @media ${device.mobile} {
+    padding: 12px;
+  }
+`
+
+export const OrderIdLabel = styled.span`
+  font-size: 14px;
+  font-weight: 400;
+  color: ${cores.buttonText};
+  opacity: 0.9;
+
+  @media ${device.mobile} {
+    font-size: 13px;
+  }
+`
+
+export const OrderIdValue = styled.span`
+  font-size: 18px;
+  font-weight: 900;
+  color: ${cores.buttonText};
+  letter-spacing: 1px;
+
+  @media ${device.mobile} {
+    font-size: 16px;
+  }
+`
+
 export const Botao = styled.button`
   width: 100%;
   max-width: 328px;

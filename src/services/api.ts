@@ -50,6 +50,15 @@ export interface CheckoutPayload {
   pagamento: CheckoutPagamento
 }
 
+export interface CheckoutResponse {
+  orderId?: string
+  id?: string
+  order?: {
+    id?: string
+    orderId?: string
+  }
+}
+
 export const api = {
   async buscarRestaurantes(): Promise<RestauranteAPI[]> {
     try {
@@ -91,7 +100,7 @@ export const api = {
     }
   },
 
-  async checkout(payload: CheckoutPayload) {
+  async checkout(payload: CheckoutPayload): Promise<CheckoutResponse> {
     // Converter para formato snake_case que é comum em APIs REST
     const payloadFormatado = {
       products: payload.itens.map((item) => ({

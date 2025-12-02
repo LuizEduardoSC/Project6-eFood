@@ -53,12 +53,26 @@ const ModalEntrega = ({
   if (!isOpen) return null
 
   const handleChange = (campo: keyof DadosEntrega, valor: string) => {
-    setDados((prev) => ({ ...prev, [campo]: valor }))
+    if (campo === 'cep') {
+      // Remove tudo que não é número
+      const apenasNumeros = valor.replace(/\D/g, '')
+      // Limita a 8 dígitos
+      const cepLimitado = apenasNumeros.slice(0, 8)
+      setDados((prev) => ({ ...prev, [campo]: cepLimitado }))
+    } else {
+      setDados((prev) => ({ ...prev, [campo]: valor }))
+    }
   }
 
   const validar = () => {
     if (!dados.recebedor || !dados.endereco || !dados.cidade || !dados.cep) {
       setErro('Preencha todos os campos obrigatórios para continuar.')
+      return false
+    }
+    // Valida se o CEP tem 8 dígitos
+    const cepLimpo = dados.cep.replace(/\D/g, '')
+    if (cepLimpo.length !== 8) {
+      setErro('CEP deve conter 8 dígitos.')
       return false
     }
     setErro('')
@@ -114,8 +128,12 @@ const ModalEntrega = ({
               <S.CampoGrupo>
                 <S.Label>CEP</S.Label>
                 <S.Input
+                  type="text"
+                  inputMode="numeric"
                   value={dados.cep}
                   onChange={(e) => handleChange('cep', e.target.value)}
+                  placeholder="00000000"
+                  maxLength={8}
                 />
               </S.CampoGrupo>
             </S.Coluna>

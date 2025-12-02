@@ -70,7 +70,25 @@ const ModalPagamento = ({
   const total = itensCarrinho.reduce((acc, item) => acc + item.preco, 0)
 
   const handleChange = (campo: keyof DadosPagamento, valor: string) => {
-    setPagamento((prev) => ({ ...prev, [campo]: valor }))
+    if (campo === 'numeroCartao') {
+      // Remove tudo que não é número e limita a 19 dígitos
+      const apenasNumeros = valor.replace(/\D/g, '').slice(0, 19)
+      setPagamento((prev) => ({ ...prev, [campo]: apenasNumeros }))
+    } else if (campo === 'cvv') {
+      // Remove tudo que não é número e limita a 4 dígitos
+      const apenasNumeros = valor.replace(/\D/g, '').slice(0, 4)
+      setPagamento((prev) => ({ ...prev, [campo]: apenasNumeros }))
+    } else if (campo === 'mesVencimento') {
+      // Remove tudo que não é número e limita a 2 dígitos
+      const apenasNumeros = valor.replace(/\D/g, '').slice(0, 2)
+      setPagamento((prev) => ({ ...prev, [campo]: apenasNumeros }))
+    } else if (campo === 'anoVencimento') {
+      // Remove tudo que não é número e limita a 4 dígitos
+      const apenasNumeros = valor.replace(/\D/g, '').slice(0, 4)
+      setPagamento((prev) => ({ ...prev, [campo]: apenasNumeros }))
+    } else {
+      setPagamento((prev) => ({ ...prev, [campo]: valor }))
+    }
   }
 
   const validar = () => {
@@ -88,6 +106,48 @@ const ModalPagamento = ({
       setErro('Preencha os dados de entrega antes de pagar.')
       return false
     }
+
+    // Valida número do cartão (13-19 dígitos)
+    const numeroCartaoLimpo = pagamento.numeroCartao.replace(/\D/g, '')
+    if (numeroCartaoLimpo.length < 13 || numeroCartaoLimpo.length > 19) {
+      setErro('Número do cartão deve conter entre 13 e 19 dígitos.')
+      return false
+    }
+
+    // Valida CVV (3-4 dígitos)
+    const cvvLimpo = pagamento.cvv.replace(/\D/g, '')
+    if (cvvLimpo.length < 3 || cvvLimpo.length > 4) {
+      setErro('CVV deve conter 3 ou 4 dígitos.')
+      return false
+    }
+
+    // Valida mês (01-12)
+    const mesLimpo = pagamento.mesVencimento.replace(/\D/g, '')
+    const mesNumero = parseInt(mesLimpo, 10)
+    if (!mesLimpo || mesNumero < 1 || mesNumero > 12) {
+      setErro('Mês de vencimento deve ser entre 01 e 12.')
+      return false
+    }
+
+    // Valida ano (2 ou 4 dígitos, ano atual ou futuro)
+    const anoLimpo = pagamento.anoVencimento.replace(/\D/g, '')
+    if (anoLimpo.length !== 2 && anoLimpo.length !== 4) {
+      setErro('Ano de vencimento deve conter 2 ou 4 dígitos.')
+      return false
+    }
+    const anoAtual = new Date().getFullYear()
+    let anoNumero: number
+    if (anoLimpo.length === 2) {
+      // Se for 2 dígitos, assume 2000-2099
+      anoNumero = 2000 + parseInt(anoLimpo, 10)
+    } else {
+      anoNumero = parseInt(anoLimpo, 10)
+    }
+    if (anoNumero < anoAtual) {
+      setErro('Ano de vencimento não pode ser no passado.')
+      return false
+    }
+
     setErro('')
     return true
   }
@@ -122,8 +182,15 @@ const ModalPagamento = ({
 
     try {
       setLoading(true)
-      await api.checkout(payload)
-      onCheckoutSucesso()
+      const response = await api.checkout(payload)
+      // Extrair o ID do pedido da resposta (pode vir em diferentes formatos)
+      const orderId =
+        response.orderId ||
+        response.id ||
+        response.order?.id ||
+        response.order?.orderId ||
+        undefined
+      onCheckoutSucesso(orderId)
     } catch (e) {
       setErro('Não foi possível concluir o pagamento. Tente novamente.')
     } finally {
@@ -157,8 +224,12 @@ const ModalPagamento = ({
               <S.GrupoCampo>
                 <S.Label>Número do cartão</S.Label>
                 <S.Input
+                  type="text"
+                  inputMode="numeric"
                   value={pagamento.numeroCartao}
                   onChange={(e) => handleChange('numeroCartao', e.target.value)}
+                  placeholder="0000000000000000"
+                  maxLength={19}
                 />
               </S.GrupoCampo>
             </S.ColunaNumeroCartao>
@@ -166,8 +237,12 @@ const ModalPagamento = ({
               <S.GrupoCampo>
                 <S.Label>CVV</S.Label>
                 <S.Input
+                  type="text"
+                  inputMode="numeric"
                   value={pagamento.cvv}
                   onChange={(e) => handleChange('cvv', e.target.value)}
+                  placeholder="000"
+                  maxLength={4}
                 />
               </S.GrupoCampo>
             </S.ColunaCVV>
@@ -178,10 +253,14 @@ const ModalPagamento = ({
               <S.GrupoCampo>
                 <S.Label>Mês de vencimento</S.Label>
                 <S.Input
+                  type="text"
+                  inputMode="numeric"
                   value={pagamento.mesVencimento}
                   onChange={(e) =>
                     handleChange('mesVencimento', e.target.value)
                   }
+                  placeholder="MM"
+                  maxLength={2}
                 />
               </S.GrupoCampo>
             </S.Coluna>
@@ -189,10 +268,14 @@ const ModalPagamento = ({
               <S.GrupoCampo>
                 <S.Label>Ano de vencimento</S.Label>
                 <S.Input
+                  type="text"
+                  inputMode="numeric"
                   value={pagamento.anoVencimento}
                   onChange={(e) =>
                     handleChange('anoVencimento', e.target.value)
                   }
+                  placeholder="AAAA"
+                  maxLength={4}
                 />
               </S.GrupoCampo>
             </S.Coluna>

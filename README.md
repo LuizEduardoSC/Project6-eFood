@@ -1,46 +1,141 @@
-# Getting Started with Create React App
+🍽️ eFood - Plataforma de Delivery de Comida
+Uma aplicação web moderna e responsiva para delivery de comida, construída com React e TypeScript. O projeto oferece uma experiência completa de pedidos online, desde a escolha dos pratos até a finalização da compra.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+✨ Funcionalidades
+🎯 Catálogo de Produtos: Interface intuitiva para explorar pratos e restaurantes
 
-## Available Scripts
+🛒 Carrinho de Compras Interativo:
 
-In the project directory, you can run:
+Adicionar/remover itens
 
-### `npm start`
+Ajustar quantidades
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Visualizar resumo do pedido
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+📱 Design Responsivo: Experiência otimizada para mobile, tablet e desktop
 
-### `npm test`
+✅ Validações de Formulário: Verificações robustas para dados do pedido
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+🚀 Finalização de Pedido: Fluxo completo de checkout
 
-### `npm run build`
+🛠️ Tecnologias
+React 18 - Biblioteca principal para construção da interface
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+TypeScript - Tipagem estática para maior segurança do código
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Create React App - Configuração inicial otimizada
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+CSS Modules - Estilização modular e escopada
 
-### `npm run eject`
+ESLint + Prettier - Padronização e qualidade do código
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Vercel - Hospedagem e deploy contínuo
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+📁 Estrutura do Projeto
+text
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── Header/         # Cabeçalho da aplicação
+│   ├── Footer/         # Rodapé da aplicação
+│   ├── ProductCard/    # Card de produtos
+│   └── Cart/          # Componentes do carrinho
+├── pages/              # Páginas da aplicação
+│   ├── Home/          # Página inicial
+│   ├── Restaurant/    # Página de restaurante
+│   └── Checkout/      # Página de finalização
+├── hooks/              # Custom hooks
+├── utils/              # Funções utilitárias
+├── types/              # Definições TypeScript
+└── styles/             # Estilos globais
+🚀 Como Executar
+Pré-requisitos
+Node.js (versão 16 ou superior)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+npm ou yarn
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Instalação
+Clone o repositório:
 
-## Learn More
+bash
+git clone https://github.com/LuizEduardoSC/Project6-eFood.git
+cd Project6-eFood
+Instale as dependências:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+bash
+npm install
+# ou
+yarn install
+Execute em modo desenvolvimento:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+bash
+npm start
+# ou
+yarn start
+Acesse http://localhost:3000 no navegador
+
+Outros Scripts Disponíveis
+npm test - Executa testes em modo interativo
+
+npm run build - Cria versão de produção na pasta build
+
+npm run eject - Remove a dependência do Create React App (irreversível)
+
+🌐 Deploy
+O projeto está hospedado na Vercel e pode ser acessado em:
+
+🔗 project6-e-food.vercel.app
+O deploy é automático através da integração com o GitHub.
+
+📊 Status do Projeto
+✅ Concluído - Versão 1.0 finalizada
+
+Últimas Atualizações:
+
+Validações de formulário implementadas
+
+Correção de ID do pedido
+
+Lógica do carrinho aprimorada
+
+Responsividade completa
+
+👨‍💻 Desenvolvimento
+Padrões de Código
+Convenção de nomes em PascalCase para componentes
+
+Hooks customizados para lógica reutilizável
+
+Tipagem TypeScript completa
+
+Componentes funcionais com React Hooks
+
+Commits
+Os commits seguem o padrão convencional:
+
+feat: para novas funcionalidades
+
+fix: para correções de bugs
+
+docs: para documentação
+
+refactor: para refatorações
+
+🤝 Contribuição
+Faça um fork do projeto
+
+Crie uma branch para sua feature (git checkout -b feature/nova-feature)
+
+Commit suas mudanças (git commit -m 'feat: adiciona nova feature')
+
+Push para a branch (git push origin feature/nova-feature)
+
+Abra um Pull Request
+
+📄 Licença
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+
+✉️ Contato
+Desenvolvedor: Luiz Eduardo
+GitHub: @LuizEduardoSC
+
+⭐ Se este projeto foi útil para você, considere dar uma estrela no repositório!
